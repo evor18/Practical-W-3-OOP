@@ -8,7 +8,8 @@ public class XMLHandler extends DefaultHandler {
             String streetName = attributes.getValue("street");
             String houseName = attributes.getValue("house");
             String countFloor = attributes.getValue("floor");
-            DefineAddress.function(cityName, streetName, houseName, countFloor);
+            AddressDefining defining = new AddressDefining();
+            defining.add_address( Main.cities, cityName, streetName, houseName, countFloor);
         }
     }
 }

@@ -1,5 +1,4 @@
 
-import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -19,10 +18,11 @@ public class CSVParse implements Parse{
                 String street = parts[1].replace("\"", "");
                 String house = parts[2].replace("\"", "");
                 String floor = parts[3].replace("\"", "");
-                DefineAddress.function(city, street, house, floor);
+                AddressDefining defining = new AddressDefining();
+                defining.add_address( Main.cities, city, street, house, floor);
                 }
             }
         }catch (Exception e){
             System.out.print("Проблема с файлом! \n");}
-    };
+    }
 }

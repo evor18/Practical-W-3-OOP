@@ -1,14 +1,16 @@
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main{
+    public static HashMap<String, City> cities = new HashMap<>();
     public static void main(String[] args) {
         String path;
         do {
-            Dublicates.count = 0;
-            Dublicates.array = new String[25][4];
-            City.cities.clear();
+            Duplicates.count_duplicates = 0;
+            Duplicates.duplicates_array = new String[25][4];
+            cities.clear();
             System.out.print("\nВведите адрес файла или \"" +Codes.exit+ "\" для выхода: \n");
             Scanner scanner = new Scanner(System.in);
             path = scanner.nextLine().trim().replace("\"", "");
@@ -16,21 +18,31 @@ public class Main{
                 //Люто парсим
                 try {
                     if (Files.exists(Paths.get(path))){
+
+                        TimeManipulations time = new TimeManipulations();
+                        time.record();
+
                         Parse parsing;
-                        long startTime = System.nanoTime();
                         if (path.regionMatches(path.length() - 3, "xml", 0, 3))
                             parsing = new XMLParse();
                         else
                             parsing = new CSVParse();
                         parsing.parse(path);
-                        long endTime = System.nanoTime();
-                        long durationTimeSec = (endTime - startTime) / 1_000_000_000; //делим на 1 млрд, так как nanotime() даёт наносекунды
-                        if (!City.cities.isEmpty()) {
+
+                        time.stop_record();
+                        time.calculateDurationInSec();
+
+                        if (!cities.isEmpty()) {
                             System.out.print("\nРаспарсили!\n");
-                            City.showFloor();
-                            if (Dublicates.count > 0)
-                                Dublicates.show();
-                            System.out.print("Время обработки файла: " + durationTimeSec + " секунд. \n");
+                            cities.forEach((cityKeyName, city) ->{
+                                city.countFloor();
+                            });
+                            cities.forEach((cityKeyName, city) ->{
+                                city.showFloor();
+                            });
+                            if (Duplicates.count_duplicates > 0)
+                                Duplicates.show_duplicate_addresses();
+                            System.out.print("Время обработки файла: " + time.DurationInSec + " секунд. \n");
                         }
                     }
                     else
@@ -40,7 +52,5 @@ public class Main{
                 }
             }
         }while(!path.equals(Codes.exit));
-
-
     }
 }
