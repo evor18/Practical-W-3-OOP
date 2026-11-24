@@ -3,7 +3,7 @@ import java.util.HashMap;
 public class City {
 
     String name;
-    int[] floors = new int[5];
+    int[] story_buildings = new int[5];
     HashMap <String, Street> streets;
 
     public City (String name, HashMap<String, Street> streets){
@@ -11,17 +11,17 @@ public class City {
         this.streets = streets;
     }
 
-     void countFloor() {
+     void countHouses() {
          streets.forEach((streetKeyName, street) -> {
              street.houses.forEach((houseName, house) -> {
-                 floors[Integer.parseInt(house.floor) - 1]++;
+                 story_buildings[Integer.parseInt(house.countFloor) - 1]++;
              });
          });
      }
 
-     void showFloor() {
-            for (int i =0; i < floors.length; i++){
-                System.out.print("В городе " +name + " " + floors[i] + " " + (i+1) + "-этажных домов. \n");
+     void showHouses() {
+            for (int i =0; i < story_buildings.length; i++){
+                System.out.print("В городе " +name + " " + story_buildings[i] + " " + (i+1) + "-этажных домов. \n");
             }
         }
 }

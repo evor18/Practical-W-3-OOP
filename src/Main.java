@@ -35,10 +35,10 @@ public class Main{
                         if (!cities.isEmpty()) {
                             System.out.print("\nРаспарсили!\n");
                             cities.forEach((cityKeyName, city) ->{
-                                city.countFloor();
+                                city.countHouses();
                             });
                             cities.forEach((cityKeyName, city) ->{
-                                city.showFloor();
+                                city.showHouses();
                             });
                             if (Duplicates.count_duplicates > 0)
                                 Duplicates.show_duplicate_addresses();

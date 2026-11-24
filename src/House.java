@@ -1,10 +1,10 @@
 public class House {
 
     String name;
-    String floor;
+    String countFloor;
 
     public House(String name, String floor){
         this.name = name;
-        this.floor = floor;
+        this.countFloor = floor;
     }
 }

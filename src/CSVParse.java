@@ -13,13 +13,13 @@ public class CSVParse implements Parse{
                 if (title)
                     title = false;
                 else{
-                String[] parts = line.split(";");
-                String city = parts[0].replace("\"", "");
-                String street = parts[1].replace("\"", "");
-                String house = parts[2].replace("\"", "");
-                String floor = parts[3].replace("\"", "");
-                AddressDefining defining = new AddressDefining();
-                defining.add_address( Main.cities, city, street, house, floor);
+                    String[] parts = line.split(";");
+                    String city = parts[0].replace("\"", "");
+                    String street = parts[1].replace("\"", "");
+                    String house = parts[2].replace("\"", "");
+                    String floor = parts[3].replace("\"", "");
+                    AddressDefining defining = new AddressDefining();
+                    defining.add_address( Main.cities, city, street, house, floor);
                 }
             }
         }catch (Exception e){
